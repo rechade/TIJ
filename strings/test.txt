@@ -1,0 +1,52 @@
+// TIJ strings ex17 p386
+package strings;
+import util.ProcessFiles;    
+import util.TextFile;   
+import java.io.*;
+import java.util.regex.*;
+// two slash comment style
+not a comment
+/* asterisk comment style */
+not a comment
+/* multiline comment
+ * multiline comment
+ // two slash
+ * multiline comment
+ */
+ // two slash
+ 
+class CommentsStrategy implements util.Strategy {
+	public void process(File f) {
+		Pattern p = Pattern.compile ("((//.*$)+?|(/\\u002A.*\\u002A/)+?)");   
+		// Pattern p = Pattern.compile ("^(?:[^\"]*?(?:\"[^\"]*?\"[^\"]*?)?)*");
+		/*
+		int i = 0;
+		for (String line : new TextFile(f.getAbsolutePath())) {		
+			i++;
+			m.reset(line);
+			while (m.find()) {
+				System.out.println(i + ": " + m.group());
+			}
+		}
+		*/
+		String fileContents = TextFile.read(f.getAbsolutePath());		
+		Matcher m = p.matcher(fileContents);
+		while (m.find()) {
+			System.out.println(m.group());
+		}		
+	}
+}
+
+class asdf {}
+class PrintComments {
+	public static void main (String[] args) {
+		if (args.length == 1) {
+			File f = new File(args[0]);
+			CommentsStrategy cs = new CommentsStrategy();
+			ProcessFiles pf = new ProcessFiles(cs,f);
+			pf.start();		
+		} else {
+			System.out.println("Usage: java strings.PrintComments filename");			
+		}
+	}
+}
