@@ -1,11 +1,17 @@
 // TIJ holding, ex1 p278, ex8 p288, ex18 p297
-package holding;
+package net.gusto.tij.holding;
 import java.util.*;
 
-class Gerbil {
+
+class Gerbil extends net.gusto.tij.typeinfo.pets.Pet {
 	static int counter = 0;
 	int gerbilNumber;
-	Gerbil() {
+	public Gerbil(String name) { 
+		super(name); 
+		gerbilNumber = counter++;
+	}
+	public Gerbil() {
+		super();
 		gerbilNumber = counter++;
 	}
 	void hop() {

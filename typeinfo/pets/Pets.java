@@ -1,6 +1,6 @@
 //: typeinfo/pets/Pets.java
 // Facade to produce a default PetCreator.
-package typeinfo.pets;
+package net.gusto.tij.typeinfo.pets;
 import java.util.*;
 
 public class Pets {

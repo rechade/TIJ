@@ -1,6 +1,6 @@
 //: typeinfo/toys/GenericToyTest.java
 // Testing class Class.
-package typeinfo.toys;
+package net.gusto.tij.typeinfo.toys;
 
 public class GenericToyTest {
   public static void main(String[] args) throws Exception {
@@ -8,6 +8,7 @@ public class GenericToyTest {
     // Produces exact type:
     FancyToy fancyToy = ftClass.newInstance();
     Class<? super FancyToy> up = ftClass.getSuperclass();
+    Class<Toy> polymorphismTest = new FancyToy().getClass();
     // This won't compile:
     // Class<Toy> up2 = ftClass.getSuperclass();
     // Only produces Object:

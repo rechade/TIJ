@@ -1,5 +1,5 @@
 //: typeinfo/pets/Pet.java
-package typeinfo.pets;
+package net.gusto.tij.typeinfo.pets;
 
 public class Pet extends Individual {
   public Pet(String name) { super(name); }
@@ -8,4 +8,4 @@ public class Pet extends Individual {
 	public String toString() {		
 		return super.toString();
 	}
-} ///:~
+} ///:~                                         

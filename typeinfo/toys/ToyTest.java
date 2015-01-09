@@ -1,21 +1,22 @@
 //: typeinfo/toys/ToyTest.java
 // Testing class Class.
-package typeinfo.toys;
+package net.gusto.tij.typeinfo.toys;
 import static net.mindview.util.Print.*;
 
 interface HasBatteries {}
 interface Waterproof {}
+interface HasSounds {}
 interface Shoots {}
 
 class Toy {
   // Comment out the following default constructor
   // to see NoSuchMethodError from (*1*)
-  Toy() {}
+  //Toy() {}
   Toy(int i) {}
 }
 
 class FancyToy extends Toy
-implements HasBatteries, Waterproof, Shoots {
+implements HasBatteries, Waterproof, Shoots, HasSounds {
   FancyToy() { super(1); }
 }
 
@@ -29,7 +30,7 @@ public class ToyTest {
   public static void main(String[] args) {
     Class c = null;
     try {
-      c = Class.forName("typeinfo.toys.FancyToy");
+      c = Class.forName("net.gusto.tij.typeinfo.toys.FancyToy");
     } catch(ClassNotFoundException e) {
       print("Can't find FancyToy");
       System.exit(1);
