@@ -2,7 +2,7 @@
 // Shows default initial values.
 import static net.mindview.util.Print.*;
 
-public class InitialValues {
+public class InitialValues2 {
 	boolean t;
 	char c;
 	byte b;

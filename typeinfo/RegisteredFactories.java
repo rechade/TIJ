@@ -1,10 +1,35 @@
+// TIJ typeinfo p429
+// add Null Objects to the code
 //: net.gusto.tij.typeinfo/RegisteredFactories.java
 // Registering Class Factories in the base class.
 package net.gusto.tij.typeinfo;
 import net.gusto.tij.typeinfo.factory.*;
+import java.lang.reflect.*;
 import java.util.*;
+import net.mindview.util.Null;
 
-class Part {
+class PartProxyHandler implements InvocationHandler {
+	private Object proxied;
+	PartProxyHandler(Object nameable) {
+		this.proxied = new NullVersion(nameable.getClass().getSimpleName());
+	}
+	private class NullVersion implements Null, Nameable {
+		private String nullName;
+		NullVersion(String name) {
+			nullName = name;
+		}			
+		public String toString() {
+			return nullName;
+		}
+	}
+	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+		return method.invoke(proxied,args);
+	}
+}
+interface Nameable {
+	public String toString();
+}
+class Part implements Nameable {
 	public String toString() {
 		return getClass().getSimpleName();
 	}
@@ -22,9 +47,17 @@ class Part {
 		partFactories.add(new GeneratorBelt.Factory());
 	}
 	private static Random rand = new Random(47);
-	public static Part createRandom() {
+	public static Nameable createRandom() {
+		Part part = null;
 		int n = rand.nextInt(partFactories.size());
-		return partFactories.get(n).create();
+		part = partFactories.get(n).create();
+		if (n%2==0) {
+			return part;
+		} else {
+			return (Nameable)Proxy.newProxyInstance(Nameable.class.getClassLoader(), 
+													new Class[]{Nameable.class},
+													new PartProxyHandler(part) );
+		}
 	}
 }	
 
@@ -90,8 +123,13 @@ class PowerSteeringBelt extends Belt {
 
 public class RegisteredFactories {
 	public static void main(String[] args) {
-		for(int i = 0; i < 10; i++)
-			System.out.println(Part.createRandom());
+		for(int i = 0; i < 10; i++) {
+			try {
+				System.out.println(Part.createRandom());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 } /* Output:
 GeneratorBelt
