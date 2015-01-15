@@ -1,8 +1,9 @@
 //: typeinfo/toys/ToyTest.java
 // Testing class Class.
 package net.gusto.tij.typeinfo.toys;
+import java.lang.reflect.*;
 import static net.mindview.util.Print.*;
-
+import java.lang.Exception;
 interface HasBatteries {}
 interface Waterproof {}
 interface HasSounds {}
@@ -11,8 +12,44 @@ interface Shoots {}
 class Toy {
   // Comment out the following default constructor
   // to see NoSuchMethodError from (*1*)
-  //Toy() {}
+  Toy() {}
+  Toy(int i, Integer j) {}
   Toy(int i) {}
+  public int counter;
+}
+
+class ToyReflection {
+	public static void main (String[] args) {		
+		//System.out.println("asdf");
+		Class anyClass = net.gusto.tij.typeinfo.toys.Toy.class;
+		Constructor[] constructors = anyClass.getDeclaredConstructors();
+		//System.out.println(constructors.length);
+		int i=0;
+		Class[] argClasses = null;
+		for (Constructor c : constructors) {
+			argClasses = c.getParameterTypes();
+			if ( argClasses.length == 1){				
+				for (Class argClass : argClasses) {
+					/*
+					try {						
+						System.out.println(""+argClass.newInstance());
+					} catch (InstantiationException ie) {
+						System.out.println(argClass.getName());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					*/
+					try {
+						Object reflectedInstance = c.newInstance(new Object[]{22});
+						System.out.println("Made reflected instance :" + reflectedInstance.getClass().getSimpleName());
+					} catch (Exception e) {						
+						System.out.println(argClass.getName());
+						e.printStackTrace();
+					}
+				}
+			}
+		}		
+	}	
 }
 
 class FancyToy extends Toy
@@ -35,7 +72,7 @@ public class ToyTest {
       print("Can't find FancyToy");
       System.exit(1);
     }
-    printInfo(c);	
+    printInfo(c);
     for(Class face : c.getInterfaces())
       printInfo(face);
     Class up = c.getSuperclass();
@@ -51,21 +88,6 @@ public class ToyTest {
       System.exit(1);
     }
     printInfo(obj.getClass());
+    
   }
-} /* Output:
-Class name: typeinfo.toys.FancyToy is interface? [false]
-Simple name: FancyToy
-Canonical name : typeinfo.toys.FancyToy
-Class name: typeinfo.toys.HasBatteries is interface? [true]
-Simple name: HasBatteries
-Canonical name : typeinfo.toys.HasBatteries
-Class name: typeinfo.toys.Waterproof is interface? [true]
-Simple name: Waterproof
-Canonical name : typeinfo.toys.Waterproof
-Class name: typeinfo.toys.Shoots is interface? [true]
-Simple name: Shoots
-Canonical name : typeinfo.toys.Shoots
-Class name: typeinfo.toys.Toy is interface? [false]
-Simple name: Toy
-Canonical name : typeinfo.toys.Toy
-*///:~
+}
