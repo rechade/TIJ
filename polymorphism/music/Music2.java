@@ -1,12 +1,12 @@
 //: polymorphism/music/Music2.java
 // Overloading instead of upcasting.
-package polymorphism.music;
+package net.gusto.tij.polymorphism.music;
 import static net.mindview.util.Print.*;
 
 class Stringed extends Instrument {
   public void play(Note n) {
     print("Stringed.play() " + n);
-  }
+  }  
 }
 
 class Brass extends Instrument {
