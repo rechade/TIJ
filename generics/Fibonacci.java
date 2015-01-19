@@ -1,5 +1,6 @@
 //: generics/Fibonacci.java
 // Generate a Fibonacci sequence.
+package net.gusto.tij.generics;
 import net.mindview.util.*;
 
 public class Fibonacci implements Generator<Integer> {

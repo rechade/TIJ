@@ -1,0 +1,7 @@
+tij proxy transaction system
+user enters a transaction on terminal command line
+the input is interpreted and if it's valid 
+the system tries to execute it.
+if there's an exception while trying, any changes are rolled back and the user is
+informed of what failed. Otherwise the changes are committed
+eg. commands are to append text to local text files.

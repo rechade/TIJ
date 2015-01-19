@@ -1,0 +1,8 @@
+1) Transactions = file operations which can include: 
+create
+delete
+append text
+display
+
+
+

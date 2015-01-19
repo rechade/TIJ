@@ -1,5 +1,5 @@
 //: generics/watercolors/Watercolors.java
-package generics.watercolors;
+package net.gusto.tij.generics.watercolors;
 
 public enum Watercolors {
 	ZINC, LEMON_YELLOW, MEDIUM_YELLOW, DEEP_YELLOW, ORANGE,

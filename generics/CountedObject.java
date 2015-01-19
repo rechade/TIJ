@@ -1,4 +1,5 @@
 //: generics/CountedObject.java
+package net.gusto.tij.generics;
 
 public class CountedObject {
 	private static long counter = 0;

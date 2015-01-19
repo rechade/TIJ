@@ -1,9 +1,9 @@
 public class LinkedStack<T> {
 	
-	private static class Node<U> {
-		U item;
-		Node<U> next;
-		Node(U item, Node next) {
+	private class Node {
+		T item;
+		Node next;
+		Node(T item, Node next) {
 			this.item = item;
 			this.next = next;
 		}		
@@ -11,20 +11,18 @@ public class LinkedStack<T> {
 			this.item = null;
 			this.next = null;
 		}		
-	}
+	}	
 	
-	
-	
-	Node<T> top;
+	Node top;
 	LinkedStack() {
-		top = new Node<T>();
+		top = new Node();
 	}
 	void push(T item){
-		Node<T> temp = new Node<T>(item, top);
+		Node temp = new Node(item, top);
 		top = temp;
 	}
 	T pop() {
-		T popped = top.item;
+		T popped = (T)top.item;
 		if (null!=top.next){
 			top = top.next;
 		}

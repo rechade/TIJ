@@ -1,0 +1,30 @@
+tij proxy transaction system
+===============================
+High Level Description
+Actors: user, system
+User enters up to three transactions on terminal command line
+the input is interpreted and if it's valid 
+the system tries to execute it.
+if there's an exception while trying, any changes are rolled back and the user is
+informed of what failed. Otherwise the changes are committed
+eg. commands are to append text to local text files.
+
+assume in the normal case, files will always be in a state that can be rolled back (no other users
+will have modified the files in a way that this program cannot roll back its
+transactions, although the files may be open or unusable in some other way)
+
+Successfull Instance 01
+Process Transactions
+User enters batch of 3 valid instructions to append to an existing file.
+Executed on the file system with no exceptions.
+System commits appends, reports successful result.
+
+EXTENSION
+Alternate Instance 01 exception while processing
+Rollback Transactions on exception
+user's first command in a batch of 3 is valid and executed on the file system
+one of batch's subsequent commands causes an exception
+earlier transactions are undone, no further commands are processed in this batch
+error report is shown to user
+
+

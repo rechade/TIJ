@@ -1,17 +1,19 @@
 //: generics/GenericMethods.java
 
 public class GenericMethods {
-	public <T> void f(T x) {
+	public <T, U> void f(T x, U y, Integer z) {
 		System.out.println(x.getClass().getName());
+		System.out.println(y.getClass().getName());
+		System.out.println(z.getClass().getName());
 	}
 	public static void main(String[] args) {
 		GenericMethods gm = new GenericMethods();
-		gm.f("");
-		gm.f(1);
-		gm.f(1.0);
-		gm.f(1.0F);
-		gm.f('c');
-		gm.f(gm);
+		gm.f("",1,1);
+		gm.f(1,"",1);
+		gm.f(1.0,'v',3);
+		gm.f(1.0F,1,1);
+		gm.f('c',',',4);
+		gm.f(gm,"",0xF1);
 	}
 } /* Output:
 java.lang.String
